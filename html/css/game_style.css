@@ -1,3 +1,12 @@
+*{
+	font-family: 'Akt', sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 300;
+	font-style: normal;
+}
+
+h1{font-weight: 900;}
+
 body{
 	display: flex;
 	min-height: 100vh;
@@ -9,10 +18,25 @@ body{
 	border: 8px solid rgba(0,0,0,1)
 }
 
+.punkteBlock h1{
+	color: #ffffff;
+	margin:15px 0 0 30px;
+}
+
+.punkteBlock h2{
+	color: #ffffff;
+	margin: 0 0 0 30px;
+}
+
+.textNextBlock h1{
+	color: #ffffff;
+	margin: 0 0 0 30px;
+}
+
 .gameField{
 	width: 600px;
 	height: 1100px;
-	background-color: #ff0000;
+	background-color: #000033;
 	margin: 0 20px 0 20px;	
 }
 .scoreboard{
@@ -46,12 +70,16 @@ body{
 	align-items: center;
 }
 .punkteBlock{
+	display: flex;
 	width: 350px;
 	height: 200px;
+	flex-direction: column;
 }
 .textNextBlock{
+	display: flex;
 	width: 350px;
 	height: 50px;
+	align-items: center;
 	margin: 0 0 -30px 0;
 }
 .imgNextBlock{

@@ -1,0 +1,28 @@
+<!DOCTYPE>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<link href="css/game_style.css" rel="stylesheet" type="text/css">
+	<title>Web/OS-Tetris</title>
+</head>
+	<div class="scoreboard">
+		
+	</div>
+	<div class="gameField">
+		
+	</div>
+	<div class="infoBlock">
+		<div class="punkteBlock">
+					
+		</div>
+		<div class="textNextBlock">
+			
+		</div>
+		<div class="imgNextBlock">
+			
+		</div>
+	</div>
+<body>
+
+</body>
+</html>
