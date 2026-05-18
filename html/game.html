@@ -1,4 +1,4 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 	<meta charset="UTF-8">
@@ -8,11 +8,12 @@
 	<link rel="stylesheet" href="font.gooleapis.com/css2?family=Aktwght@100..900display=swap">
 	<link rel="stylesheet" href="css/game_style.css" type="text/css">
 </head>
+<body>
 	<div class="scoreboard">
 		
 	</div>
 	<div class="gameField">
-		
+		<canvas id="gameCanvas" width="600" height="1100"></canvas>	
 	</div>
 	<div class="infoBlock">
 		<div class="punkteBlock">
@@ -28,7 +29,65 @@
 			
 		</div>
 	</div>
-<body>
+
+<script>
+
+	let tickRate = 1; // ms (1/tickRate ist de Frequenz in denen die Blöcke fallen)
+	let fld = []; // Felder Besetzung
+	for(let i = 0; i < 21; i++){
+		fld[i] = [];
+		for(let j = 0; j < 11; j++){
+			fld[i][j] = 0;		
+		}
+	}	
+
+	const canvas = document.getElementById("gameCanvas");
+	const draw = canvas.getContext("2d");
+	
+	class iBlock{		
+		constructor(color){
+			this.color = color;
+			this.pos = [[200,150],[250,150],[300,150],[350,150]];		
+		}
+	}
+	let block = new iBlock("green");
+	
+	for(let i = 0; i < 22; i++){
+		for(let j = 0; j < 12; j++){
+			if(i == 0 || i == 21 || j == 0 || j == 11){
+				draw.fillStyle = "#404040";
+				draw.fillRect(0+j*50, 0+i*50, 50, 50);
+				draw.fillStyle = "gray";
+				draw.fillRect(7+j*50, 7+i*50, 36, 36);
+				drawFld();
+			}
+		}	
+	}
+
+	function move(){
+		for(let i = 0; i < 4; i++){
+			
+			block.pos[i][1] += 1; // Faktor x zur Frequenz (x/tickRate) ist die tatsächliche Frequenz)
+		}
+		console.log(block.pos[0][0]);
+		drawFld();
+	}
+	function drawFld(){
+		draw.fillStyle = "#000033";
+		draw.fillRect(50, 50, 500, 1000);
+		draw.fillStyle = block.color;
+		for(let i = 0; i < 4; i++){
+			draw.fillRect(0+block.pos[i][0], 0+block.pos[i][1], 50, 50);
+		}
+	}
+	
+ 	let intervalID;
+	function clock(){
+		intervalId = setInterval(() => {move();}, tickRate);
+	}
+	clock();
+	
+</script>
 
 </body>
 </html>
