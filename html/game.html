@@ -32,16 +32,16 @@
 
 <script>
 
-	let tickRate = 50; // ms (1/tickRate ist de Frequenz in denen die Blöcke fallen)
+	let tickRate = 1; // ms (1/tickRate ist de Frequenz in denen die Blöcke fallen)
 	let fld = []; // Felder Besetzung
 	for(let i = 0; i < 22; i++){
 		fld[i] = [];
 		for(let j = 0; j < 12; j++){
 			fld[i][j] = [];
-			fld[i][j][0] = "0";		// Index [i][j][0] sagt ob das Feld belegt ist (0 nein / 1 ja); Index [i][j][1] gibt den Farbcode
+			fld[i][j][0] = false;		// Index [i][j][0] sagt ob das Feld belegt ist (0 nein / 1 ja); Index [i][j][1] gibt den Farbcode
 			fld[i][j][1] = "0";
 			if(i == 21){
-				fld[i][j][0] = "1";
+				fld[i][j][0] = true;
 			}		
 		}
 	}	
@@ -50,6 +50,30 @@
 	const draw = canvas.getContext("2d");
 	
 	class iBlock{		
+		constructor(color){
+			this.color = color;
+			this.pos = [[200,150],[250,150],[300,150],[350,150]];		
+		}
+	}
+	class l2Block{		
+		constructor(color){
+			this.color = color;
+			this.pos = [[200,150],[250,150],[300,150],[350,150]];		
+		}
+	}
+	class l1Block{		
+		constructor(color){
+			this.color = color;
+			this.pos = [[200,150],[250,150],[300,150],[350,150]];		
+		}
+	}
+	class oBlock{		
+		constructor(color){
+			this.color = color;
+			this.pos = [[200,150],[250,150],[300,150],[350,150]];		
+		}
+	}
+	class tBlock{		
 		constructor(color){
 			this.color = color;
 			this.pos = [[200,150],[250,150],[300,150],[350,150]];		
@@ -73,7 +97,7 @@
 		for(let i = 0; i < 4; i++){
 			if(!collision(Math.floor(block.pos[i][1]/50), Math.floor(block.pos[i][0]/50))){
 				block.pos[i][1] += 1; // Faktor x zur Frequenz (x/tickRate) ist die tatsächliche Frequenz)
-			}
+			}else{break;}
 		}
 		drawFld();
 	}
@@ -87,7 +111,7 @@
 		}
 		for(let i = 0; i < 22; i++){
 			for(let j = 0; j < 12; j++){
-				if(fld[i][j][0] == true && fld[i][j][1] != "0"){
+				if(fld[i][j][0] == true && fld[i][j][1] != false){
 					draw.fillStyle = fld[i][j][1];
 					draw.fillRect(0+j*50, 0+i*50, 50, 50);
 				}
@@ -96,8 +120,13 @@
 	}
 
 	function collision(x, y){
-		console.log(x, "  ", y);
 		if(fld[x+1][y+1][0] == true){
+			for(let i = 0; i < 4; i++){
+				fld[Math.floor(block.pos[i][1]/50)][Math.floor(block.pos[i][0]/50)][0] = true;
+				fld[Math.floor(block.pos[i][1]/50)][Math.floor(block.pos[i][0]/50)][1] = block.color;
+			}
+			block = null;
+			block = new iBlock("red");
 			return true;
 		}
 	}
