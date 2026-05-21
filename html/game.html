@@ -55,7 +55,7 @@
 	class iBlock{		
 		constructor(color){
 			this.color = color;
-			this.pos = [[200,150],[250,150],[300,150],[350,150]];		
+			this.pos = [[250,150],[200,150],[300,150],[350,150]];		
 		}
 	}
 	class z1Block{		
@@ -94,7 +94,6 @@
 			this.pos = [[300,150],[250,150],[300,100],[350,150]];		
 		}
 	}
-	console.log(l1Block);
 	const blocks = [iBlock, z1Block, z2Block, l1Block, l2Block, oBlock, tBlock];
 	newBlock();
 	
@@ -113,7 +112,9 @@
 	document.addEventListener("keydown", handleInput);
 	function handleInput(e){
 		if(e.key == "w" || e.key == "ArrowUp" || e.key == " "){
-			
+			if(block.constructor.name != "oBlock"){
+				rotateBlock();
+			}
 		}else if(e.key == "a" || e.key == "ArrowLeft"){
 			for(let i = 0; i < 4; i++){
 				block.pos[i][0] -= 50;	
@@ -139,6 +140,30 @@
 		}
 		drawFld();
 	}
+	
+	let tmpPos = [];
+	for(let i = 0; i < 4; i++){
+		tmpPos[i] = [];
+	}
+
+	function rotateBlock(){
+		let nullX = block.pos[0][0];
+		let nullY = block.pos[0][1];
+		for(let i = 0; i < 4; i++){
+			block.pos[i][0] -= nullX;
+			block.pos[i][1] -= nullY;
+		}
+		for(let i = 1; i < 4; i++){
+			tmp = block.pos[i][0];
+			block.pos[i][0] = block.pos[i][1] * -1;
+			block.pos[i][1] = tmp; 
+		}
+		for(let i = 0; i < 4; i++){
+			block.pos[i][0] += nullX;
+			block.pos[i][1] += nullY;
+		}
+	}
+
 	function drawFld(){
 		draw.fillStyle = "#000033";
 		draw.fillRect(50, 50, 500, 1000);
@@ -170,7 +195,6 @@
 	}
 
 	function newBlock(){
-		console.log(l2Block);
 		let RandomBlock = blocks[Math.floor(Math.random() * blocks.length)];
 		let randomColor = colors[Math.floor(Math.random() * colors.length)]
 		block = new RandomBlock(randomColor);
@@ -180,7 +204,6 @@
 	function clock(){
 		intervalId = setInterval(() => {
 			move();
-			console.log("Moved");
 		}, tickRate);
 	}
 	clock();
