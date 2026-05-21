@@ -33,7 +33,10 @@
 <script>
 
 	let tickRate = 1; // ms (1/tickRate ist de Frequenz in denen die Blöcke fallen)
+	let colors = ["#eb0000", "#ff6200", "#ffbb00", "#0ac900", "#0008e6", "#00baf2", "#7b00bd"]; // Farbpalette
 	let fld = []; // Felder Besetzung
+	let block;
+
 	for(let i = 0; i < 22; i++){
 		fld[i] = [];
 		for(let j = 0; j < 12; j++){
@@ -91,7 +94,9 @@
 			this.pos = [[300,150],[250,150],[300,100],[350,150]];		
 		}
 	}
-	let block = new z2Block("green");
+	console.log(l1Block);
+	const blocks = [iBlock, z1Block, z2Block, l1Block, l2Block, oBlock, tBlock];
+	newBlock();
 	
 	for(let i = 0; i < 22; i++){
 		for(let j = 0; j < 12; j++){
@@ -118,8 +123,8 @@
 				block.pos[i][0] += 50;
 			}
 		}else if(e.key == "s" || e.key == "ArrowDown"){
-			for(let i = 0; i < 4; i++){
-				block.pos[i][1] += 6;
+			for(let i = 0; i < 10; i++){
+				move();
 			}
 		}
 	}
@@ -128,7 +133,9 @@
 		for(let i = 0; i < 4; i++){
 			if(!collision(Math.floor(block.pos[i][1]/50), Math.floor(block.pos[i][0]/50))){
 				block.pos[i][1] += 1; // Faktor x zur Frequenz (x/tickRate) ist die tatsächliche Frequenz)
-			}else{break;}
+			}else{	
+				break;
+			}
 		}
 		drawFld();
 	}
@@ -151,68 +158,30 @@
 	}
 
 	function collision(x, y){
+		readyToMove = false;
 		if(fld[x+1][y][0] == true){
 			for(let i = 0; i < 4; i++){
 				fld[Math.floor(block.pos[i][1]/50)][Math.floor(block.pos[i][0]/50)][0] = true;
 				fld[Math.floor(block.pos[i][1]/50)][Math.floor(block.pos[i][0]/50)][1] = block.color;
 			}
-			block = null;
-			let randomColor = Math.floor(Math.random()*7)+1;
-			let randomBlock = Math.floor(Math.random()*7)+1;
-			let color = null;
-			switch(randomColor){
-				case 1: 
-					color = "#ff0000";
-					break;
-				case 2: 
-					color = "#ff7700";
-					break;
-				case 3: 
-					color = "#1900ff";
-					break;
-				case 4: 
-					color = "#00d5ff";
-					break;
-				case 5: 
-					color = "#15ff00";
-					break;
-				case 6: 
-					color = "fff700";
-					break;
-				case 7: 
-					color = "#a600ff";
-					break;
-			}
-			switch(randomBlock){
-				case 1: 
-					block = new iBlock(color);
-					break;
-				case 2: 
-					block = new oBlock(color);
-					break;
-				case 3: 
-					block = new z1Block(color);
-					break;
-				case 4: 
-					block = new z1Block(color);
-					break;
-				case 5: 
-					block = new l1Block(color);
-					break;
-				case 6: 
-					block = new l2Block(color);
-					break;
-				case 7: 
-					block = new tBlock(color);
-					break;
-			}
+			newBlock();
 			return true;
 		}
 	}
-	
+
+	function newBlock(){
+		console.log(l2Block);
+		let RandomBlock = blocks[Math.floor(Math.random() * blocks.length)];
+		let randomColor = colors[Math.floor(Math.random() * colors.length)]
+		block = new RandomBlock(randomColor);
+	}	
+
  	let intervalID;
 	function clock(){
-		intervalId = setInterval(() => {move();}, tickRate);
+		intervalId = setInterval(() => {
+			move();
+			console.log("Moved");
+		}, tickRate);
 	}
 	clock();
 	
