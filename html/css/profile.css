@@ -1,13 +1,46 @@
-html, body{
+*{
+	font-family: 'Akt', sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 900;
+	font-style: normal;
+}
+
+body, html{
 	margin: 0;
 	padding: 0;
 }
 
 .gameField {
-	display: flex;
-	background-color: #000000;
+	position: relative;
 	height: 100vh;
-	width: 100vw;
-	margin: 0;
-	padding: 0;
+	width: 1000vw;
+	background-color: red;
 }
+
+.iframeDiv{
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-color: blue;
+	z-index: 1;
+}
+
+button{
+	width: 200px;
+	height: 90px;
+	border: none;
+	border: 2px solid rgba(255,255,255,0.2);
+	background: transparent;
+	border-radius: 10px;
+	background-filter: blur(20px);
+	color: white;
+	font-size: 40px;
+}
+
+.btnDiv{
+	position: absolute;
+	left: 100px;
+	top: 100px;
+	z-index: 1000;
+}
+

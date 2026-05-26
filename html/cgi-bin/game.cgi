@@ -16,12 +16,18 @@ print(f"""<!DOCTYPE html>
 <html lang="de">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Profil</title>
 	<link rel="stylesheet" href="../css/profile.css" type="text/css">
 </head>
 <body>
 	<div class="gameField">
-		<iframe src="../game.html" width="100%"></iframe>
+		<div class="btnDiv">
+			<button>Profil</button>
+		</div>
+		<div class="iframeDiv">
+			<iframe src="../game.html" width="100%" height="100%"></iframe>
+		</div>
 	</div>
 </body>
 </html>""")
