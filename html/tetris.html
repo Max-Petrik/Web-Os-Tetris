@@ -6,7 +6,7 @@
 	<link rel="preconnect" href="https://font.googleapis.com">
 	<link rel="preconnect" href="https://gstatic.com" crossorigin>
 	<link rel="stylesheet" href="font.gooleapis.com/css2?family=Aktwght@100..900display=swap">
-	<link rel="stylesheet" href="css/game_style.css" type="text/css">
+	<link rel="stylesheet" href="css/tetris.css" type="text/css">
 </head>
 <body>
 	<div class="scoreboard">
@@ -36,6 +36,7 @@
 	let colors = ["#eb0000", "#ff6200", "#ffbb00", "#0ac900", "#0008e6", "#00baf2", "#7b00bd"]; // Farbpalette
 	let fld = []; // Felder Besetzung
 	let block;
+	let loose = false;
 
 	for(let i = 0; i < 22; i++){
 		fld[i] = [];
@@ -43,7 +44,7 @@
 			fld[i][j] = [];
 			fld[i][j][0] = false;		// Index [i][j][0] sagt ob das Feld belegt ist (0 nein / 1 ja); Index [i][j][1] gibt den Farbcode
 			fld[i][j][1] = "0";
-			if(i == 21){
+			if(i == 21 || j == 0 || j == 11){
 				fld[i][j][0] = true;
 			}		
 		}
@@ -134,7 +135,6 @@
 		}else if(e.key == "d" || e.key == "ArrowRight"){
 			check = true;
 			for(let i = 0; i < 4; i++){
-				console.log(fld[Math.floor(block.pos[i][1]/50)][Math.floor(block.pos[i][0]/50)+1][0]);
 				if(fld[Math.floor(block.pos[i][1]/50)][Math.floor(block.pos[i][0]/50)+1][0] == 1){
 					check = false;
 					break;
@@ -162,6 +162,12 @@
 			}
 		}
 		drawFld();
+	}
+
+ 	function checkForLoose(i){
+		if(block.pos[i][1] <= 249){
+			loose = true;
+		}
 	}
 	
 	let tmpPos = [];
@@ -203,6 +209,22 @@
 				}
 			}
 		}
+		draw.fillStyle = "#ff0000";
+		draw.fillRect(50, 245, 500, 5);
+	}
+
+	function checkForKill(){
+		for(let i = 1; i < 21; i++){
+			let tmpCount = 0;
+			for(let j = 1; j < 11; j++){
+				if(fld[i][j][0] == true){
+					tmpCount += 1;
+				}
+			}
+			if(tmpCount == 10){
+				console.log("full row");
+			}
+		}
 	}
 
 	function collision(x, y){
@@ -212,7 +234,9 @@
 				fld[Math.floor(block.pos[i][1]/50)][Math.floor(block.pos[i][0]/50)][0] = true;
 				fld[Math.floor(block.pos[i][1]/50)][Math.floor(block.pos[i][0]/50)][1] = block.color;
 			}
+			
 			newBlock();
+			checkForKill();
 			return true;
 		}
 	}
@@ -226,7 +250,9 @@
  	let intervalID;
 	function clock(){
 		intervalId = setInterval(() => {
-			move();
+			if(!loose){
+				move();
+			}
 		}, tickRate);
 	}
 	clock();
