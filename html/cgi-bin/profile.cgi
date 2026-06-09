@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
-import cgi
-import html
+import cgi	# Importiert das Modul cgi, um Formulardaten auszulesen
+import html	# Importiert html, um Benutzerdaten auslesen zu können
 
-form = cgi.FieldStorage()
+form = cgi.FieldStorage()	# liest Daten aus html-formular
 
+# liest die Nutzerdaten aus den jeweiligen Feldern aus
 vorname = form.getfirst("vorname", "").strip()
 nachname = form.getfirst("nachname", "").strip()
 email = form.getfirst("email", "").strip()
@@ -35,16 +36,24 @@ print(f"""<!DOCTYPE html>
 				<label>Email: {email}</label>
 			</div>
 			<div class="back">
+
+				<!-- Formular übermittelt Benutzerdaten mittels html-post an game.cgi zurück -->
 				<form action="game.cgi" method="post">
+
+					<!-- hidden input speichert die daten und macht es möglich sie in profile.cgi wieder auszulesen -->
 					<input type="hidden" name="vorname" value="{vorname}">
 					<input type="hidden" name="nachname" value="{nachname}">
 					<input type="hidden" name="email" value="{email}">
+
+					<!-- button führt zu profile.cgi, wo Benutzerdaten gespeichert werden, damit sie nicht verloren gehen -->
 					<a href="http://pan.th-brandenburg.de/~petrik/cgi-bin/game.cgi">
 						<button>Zurück</button>
 					</a>
 				</form>
 			</div>
 		</div>
+
+		<!-- -->
 		<div class="gitHub">
 			<a href="https://github.com/Max-Petrik/Web-Os-Tetris">
 				<img src="../images/github_logo.png">

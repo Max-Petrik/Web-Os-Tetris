@@ -19,7 +19,7 @@ body, html{
 
 .iframeDiv{
 	position: absolute;
-	width: 100vw;
+	width: 100%;
 	height: 100vh;
 	background-color: blue;
 	z-index: 1;
@@ -44,3 +44,13 @@ button{
 	z-index: 1000;
 }
 
+.gitHub img{
+	width: 130px;
+}
+
+.gitHub{
+	position: absolute;
+	bottom: 40px;
+	left: 60px;
+	z-index: 2000;
+}

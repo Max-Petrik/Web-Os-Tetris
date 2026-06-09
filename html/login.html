@@ -9,14 +9,18 @@
 	<link rel="stylesheet" href="fonts.googleapis.com/css2?family=Akt:wght@100..900&display=swap">
 	<link rel="stylesheet" href="css/login.css" type="text/css">
 </head>
+<body>
 	<div class ="wrapper">
 		<div class="ueberschrift">
 			<h1>Webcomputing und OS</h1>
 			<h1>- Tetris -</h1>
 		</div>
 		<div class="login">
+			<!-- Formular übermiitelt Benutzerdaten mittels html-post an game.cgi -->
 			<form action="cgi-bin/game.cgi" method="post">
 				<h1>Login</h1>
+
+				<!-- initialisiert durch eingabe des Benutzers daten (vorname, name, email) und speichert sie, sodass sie über das Formular übertragen werden können -->
 				<div class="input-box">
 					<input type="text" id="vorname" name="vorname" placeholder="Vorname" required>
 				</div>
@@ -26,18 +30,18 @@
 				<div class="input-box">
 					<input type="text" id="email" name="email" placeholder="Email" required>
 				</div>
-				<a href="http://pan.th-brandenburg.de/~petrik/cgi-bin/game.cgi">
-					<button type="submit" class="btn">Spielen</button>
-				</a>
+				<!-- leitet zur game.cgi weiter und formular liefert nötige daten mit -->
+				<button type="submit" class="btn" onclick="window.location.href='http://pan.th-brandenburg.de/~petrik/cgi-bin/game.cgi'">Spielen</button>
 			</form>
 		</div>
+
+		<!-- Container dient jediglich zur Anordnung vom gitHub logo -->
 		<div class="gitHub">
+			<!-- gitHub Logo führt bei klick zur repo vom gesamten Projekt -->
 			<a href="https://github.com/Max-Petrik/Web-Os-Tetris">
-				<img src="images/github_logo.png">
+				<img src="images/github_logo.png" alt="Error">
 			</a>
 		</div>
 	</div>
-<body>
-
 </body>
 </html>
