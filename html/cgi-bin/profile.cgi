@@ -17,6 +17,7 @@ print(f"""<!DOCTYPE html>
 <html lang="de">
 <head>
 	<meta charset="UTF-8">
+	<title>Profile</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../css/profile.css" type="text/css">
 </head>
@@ -29,7 +30,7 @@ print(f"""<!DOCTYPE html>
 			<div class="data">
 				<label>Vorname: {vorname}</label>
 			</div>
-			<div class="data";
+			<div class="data">
 				<label>Nachname: {nachname}</label>
 			</div>
 			<div class="data">
@@ -46,9 +47,7 @@ print(f"""<!DOCTYPE html>
 					<input type="hidden" name="email" value="{email}">
 
 					<!-- button führt zu profile.cgi, wo Benutzerdaten gespeichert werden, damit sie nicht verloren gehen -->
-					<a href="http://pan.th-brandenburg.de/~petrik/cgi-bin/game.cgi">
-						<button>Zurück</button>
-					</a>
+					<button type="submit" onclick="window.location.href='http://pan.th-brandenburg.de/~petrik/cgi-bin/game.cgi'">Zurück</button>
 				</form>
 			</div>
 		</div>
@@ -56,7 +55,7 @@ print(f"""<!DOCTYPE html>
 		<!-- -->
 		<div class="gitHub">
 			<a href="https://github.com/Max-Petrik/Web-Os-Tetris">
-				<img src="../images/github_logo.png">
+				<img src="../images/github_logo.png" alt="Error">
 			</a>
 		</div>
 	</div>

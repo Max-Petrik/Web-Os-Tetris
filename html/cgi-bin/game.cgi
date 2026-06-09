@@ -35,7 +35,7 @@ print(f"""<!DOCTYPE html>
 <body>
 	<div class="gitHub">
 		<a href="https://github.com/Max-Petrik/Web-Os-Tetris">
-			<img src="../images/github_logo.png">
+			<img src="../images/github_logo.png" alt="Error">
 		</a>
 	</div>
 
