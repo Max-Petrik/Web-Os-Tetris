@@ -1,8 +1,11 @@
 # Web-Os-Tetris
 
 Name: Max Petrik
+
 Matrikelnummer: 20248363
+
 URL der Seite: http://pan.th-brandenburg.de/~petrik/login.html
+
 URL zur repo: https://github.com/Max-Petrik/Web-Os-Tetris
 
 Beschreibung:
